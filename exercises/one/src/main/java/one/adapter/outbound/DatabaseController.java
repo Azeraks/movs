@@ -8,7 +8,7 @@ import one.ports.output.OutputPort;
 @Repository 
 public class DatabaseController implements OutputPort{
 
-    private List<String> data = new ArrayList();
+    final private List<String> data = new ArrayList();
 
     @Override
     public void saveMessage(String message) {
