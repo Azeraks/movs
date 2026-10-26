@@ -1,5 +1,5 @@
 package one.ports.output;
 
-public interface Output_port {
+public interface OutputPort {
     void saveMessage(String message);
 }

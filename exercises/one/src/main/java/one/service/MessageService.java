@@ -2,14 +2,15 @@ package one.service;
 
 import org.springframework.stereotype.Service;
 
-import one.ports.input.Input_port;
+import one.ports.input.InputPort;
 
 @Service
-public class MessageService implements Input_port {
+public class MessageService implements InputPort {
     
     @Override
     public String message(String m) {
-        System.out.println("Service: " + m);
-        return "Service: " + m;
+        String res = "Service" + m;
+        System.out.println(res);
+        return res;
     }
 }

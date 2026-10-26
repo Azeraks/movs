@@ -1,5 +1,5 @@
 package one.ports.input;
 
-public interface Input_port {
+public interface InputPort {
     String message(String m);
 }

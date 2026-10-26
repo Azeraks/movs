@@ -5,17 +5,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import one.ports.input.Input_port;
+import one.ports.input.InputPort;
 
 
 @RestController 
 public class MessageController {
-    
 
-    private final Input_port service;
+    private final InputPort service;
 
     @Autowired 
-    MessageController(Input_port i) {
+    MessageController(InputPort i) {
         this.service = i;
     }
 

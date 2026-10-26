@@ -3,10 +3,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import one.ports.output.Output_port;
+import one.ports.output.OutputPort;
 
 @Repository 
-public class DatabaseController implements Output_port{
+public class DatabaseController implements OutputPort{
 
     private List<String> data = new ArrayList();
 
