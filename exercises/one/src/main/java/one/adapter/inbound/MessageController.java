@@ -13,7 +13,7 @@ public class MessageController {
 
     private final InputPort service;
 
-    @Autowired 
+    @Autowired
     MessageController(InputPort i) {
         this.service = i;
     }

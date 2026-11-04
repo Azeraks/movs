@@ -1,18 +1,18 @@
-import java.util.ArrayList;
-import java.util.List;
+package one.adapter.outbound;
 
 import org.springframework.stereotype.Repository;
 
 import one.ports.output.OutputPort;
 
+
 @Repository 
 public class DatabaseController implements OutputPort{
 
-    final private List<String> data = new ArrayList();
+    // final private List<String> data = new ArrayList();
 
-    @Override
-    public void saveMessage(String message) {
-        data.add(message);
-    }
+    // @Override
+    // public void saveMessage(String message) {
+    //     data.add(message);
+    // }
 
 }

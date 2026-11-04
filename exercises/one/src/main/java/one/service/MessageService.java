@@ -9,7 +9,7 @@ public class MessageService implements InputPort {
     
     @Override
     public String message(String m) {
-        String res = "Service" + m;
+        String res = "Service: " + m;
         System.out.println(res);
         return res;
     }
