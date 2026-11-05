@@ -15,11 +15,9 @@ public class User {
     private UUID id;
     private LocalTime time;
 
-    public User(String f, String l, String p, UUID id, LocalTime t) {
+    public User(String f, String l, String p) {
         this.firstname = f;
         this.lastname = l;
         this.password = p;
-        this.id = id;
-        this.time = t;
     }
 }

@@ -1,9 +1,11 @@
 package com.azera.movs.exercise_01.application.service;
 
-import com.azera.movs.exercise_01.adapter.controller.in.dto.RegisterUserRequest;
+import com.azera.movs.exercise_01.adapter.controller.out.UserStorageAdapter;
 import com.azera.movs.exercise_01.application.port.in.UserManagementPort;
+import com.azera.movs.exercise_01.application.port.out.UserStoragePort;
 import com.azera.movs.exercise_01.domain.User;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.ObjectMapper;
 
 import java.time.LocalTime;
 import java.util.UUID;
@@ -11,19 +13,17 @@ import java.util.UUID;
 @Service
 public class UserService implements UserManagementPort {
 
+    UserStoragePort storagePort = new UserStorageAdapter(new ObjectMapper());
+
     @Override
-    public void register(RegisterUserRequest request) {
+    public void register(User user) {
 
-        LocalTime currentTime = LocalTime.now();
-        UUID uuid = UUID.randomUUID();
+        user.setId(UUID.randomUUID());
+        user.setTime(LocalTime.now());
 
-        User user = new User(
-                request.firstname(),
-                request.lastname(),
-                request.password(),
-                uuid,
-                currentTime
-        );
+        //password hashing
+
+        storagePort.save(user);
     }
 
     public void delete() {

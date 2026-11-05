@@ -1,6 +1,7 @@
 package com.azera.movs.exercise_01.application.port.out;
 
-public interface UserStoragePort {
-    public void storeUser();
+import com.azera.movs.exercise_01.domain.User;
 
+public interface UserStoragePort {
+    void save(User user);
 }
