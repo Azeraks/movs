@@ -3,6 +3,7 @@ package com.azera.movs.exercise_01.application.service;
 import com.azera.movs.exercise_01.adapter.controller.out.UserStorageAdapter;
 import com.azera.movs.exercise_01.application.port.in.UserManagementPort;
 import com.azera.movs.exercise_01.application.port.out.UserStoragePort;
+import com.azera.movs.exercise_01.application.service.exceptions.UserNotFoundException;
 import com.azera.movs.exercise_01.domain.User;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.ObjectMapper;
@@ -26,15 +27,15 @@ public class UserService implements UserManagementPort {
         storagePort.save(user);
     }
 
-    public void delete() {
+    @Override
+    public void delete(UUID uuid) {
 
     }
 
-    public void getUser() {
-
+    @Override
+    public User getUser(UUID uuid) {
+        return storagePort.findById(uuid).orElseThrow(() -> new UserNotFoundException("User not found", uuid));
     }
 
-    public void getAllUsers() {
 
-    }
 }

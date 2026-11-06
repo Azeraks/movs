@@ -3,10 +3,15 @@ package com.azera.movs.exercise_01.adapter.controller.out;
 import com.azera.movs.exercise_01.application.port.out.UserStoragePort;
 import com.azera.movs.exercise_01.domain.User;
 import tools.jackson.core.JacksonException;
+import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public class UserStorageAdapter implements UserStoragePort {
 
@@ -14,7 +19,6 @@ public class UserStorageAdapter implements UserStoragePort {
     private final ObjectMapper objectMapper;
 
     public UserStorageAdapter(ObjectMapper mapper) {
-
         this.objectMapper = mapper;
 
         try {
@@ -34,9 +38,26 @@ public class UserStorageAdapter implements UserStoragePort {
     @Override
     public void save(User user) {
         try {
-            objectMapper.writeValue(data, user);
+            List<User> users = new ArrayList<>();
+
+            if(data.exists() && data.length() > 0) {
+                users = objectMapper.readValue(data, new TypeReference<ArrayList<User>>() {});
+            }
+
+            users.add(user);
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(data, users);
+
         } catch (JacksonException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public Optional<User> findById(UUID id) {
+        List<User> userList = objectMapper.readValue(data, new TypeReference<ArrayList<User>>() {});
+
+        return userList.stream()
+                .filter(u -> u.getId().equals(id))
+                .findAny();
     }
 }
