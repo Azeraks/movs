@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface UserManagementPort {
     void register(User user);
-    void delete(UUID uuid);
+    boolean deleteUser(UUID uuid);
     User getUser(UUID uuid);
 }

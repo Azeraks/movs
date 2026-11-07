@@ -7,4 +7,5 @@ import java.util.UUID;
 public interface UserStoragePort {
     void save(User user);
     Optional<User> findById(UUID id);
+    boolean deleteUser(UUID id);
 }

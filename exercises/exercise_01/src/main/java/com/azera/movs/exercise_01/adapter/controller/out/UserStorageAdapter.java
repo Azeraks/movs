@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.IntStream;
 
 public class UserStorageAdapter implements UserStoragePort {
 
@@ -59,5 +60,22 @@ public class UserStorageAdapter implements UserStoragePort {
         return userList.stream()
                 .filter(u -> u.getId().equals(id))
                 .findAny();
+    }
+
+    @Override
+    public boolean deleteUser(UUID id) {
+
+       List<User> userList = objectMapper.readValue(data, new TypeReference<ArrayList<User>>() {});
+
+       int index = IntStream.range(0, userList.size())
+               .filter(i -> userList.get(i).getId().equals(id))
+               .findFirst()
+               .orElse(-1);
+
+       if(index != -1) {
+           userList.remove(index);
+           objectMapper.writerWithDefaultPrettyPrinter().writeValue(data, userList);
+       }
+        return false;
     }
 }

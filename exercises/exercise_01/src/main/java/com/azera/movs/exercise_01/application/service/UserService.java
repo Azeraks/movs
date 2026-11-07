@@ -28,14 +28,12 @@ public class UserService implements UserManagementPort {
     }
 
     @Override
-    public void delete(UUID uuid) {
-
+    public boolean deleteUser(UUID uuid) {
+            return storagePort.deleteUser(uuid);
     }
 
     @Override
     public User getUser(UUID uuid) {
         return storagePort.findById(uuid).orElseThrow(() -> new UserNotFoundException("User not found", uuid));
     }
-
-
 }
