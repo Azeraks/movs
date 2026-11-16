@@ -23,12 +23,13 @@ public class UserService implements UserManagementPort {
         user.setTime(LocalTime.now());
 
         //password hashing
-
+        storagePort.broadcast(user, "added");
         storagePort.save(user);
     }
 
     @Override
     public boolean deleteUser(UUID uuid) {
+        storagePort.broadcast(getUser(uuid), "delete");
         return storagePort.deleteUser(uuid);
     }
 

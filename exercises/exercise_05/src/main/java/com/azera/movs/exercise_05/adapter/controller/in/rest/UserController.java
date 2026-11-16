@@ -1,4 +1,4 @@
-package com.azera.movs.exercise_05.adapter.controller.in;
+package com.azera.movs.exercise_05.adapter.controller.in.rest;
 
 import com.azera.movs.exercise_05.adapter.controller.in.dto.DeleteUserResponse;
 import com.azera.movs.exercise_05.adapter.controller.in.dto.GetUserResponse;
