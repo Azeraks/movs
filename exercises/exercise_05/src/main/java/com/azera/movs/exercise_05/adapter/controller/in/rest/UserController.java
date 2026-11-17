@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -24,19 +25,19 @@ public class UserController {
 
     @PostMapping("/registration")
     ResponseEntity<RegisterUserResponse> registerUser(@RequestBody RegisterUserRequest requestUser) {
-        try {
-            User newUser = new User(
-                    requestUser.firstname(),
-                    requestUser.lastname(),
-                    requestUser.password()
-            );
-            userManagementPort.register(newUser);
+        User newUser = new User(
+                requestUser.firstname(),
+                requestUser.lastname(),
+                requestUser.password()
+        );
 
+        try {
+            userManagementPort.register(newUser);
         } catch (RuntimeException e) {
-            System.out.println("hier?");
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(new RegisterUserResponse("User successfully created"));
+
+        return ResponseEntity.created(URI.create("/users/" + newUser.getId())).build();
     }
 
 

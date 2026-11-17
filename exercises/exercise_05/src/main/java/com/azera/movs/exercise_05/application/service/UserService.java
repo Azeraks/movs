@@ -19,9 +19,6 @@ public class UserService implements UserManagementPort {
     @Override
     public void register(User user) {
 
-        user.setId(UUID.randomUUID());
-        user.setTime(LocalTime.now());
-
         //password hashing
         storagePort.broadcast(user, "added");
         storagePort.save(user);

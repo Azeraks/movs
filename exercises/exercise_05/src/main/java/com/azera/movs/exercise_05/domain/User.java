@@ -19,5 +19,7 @@ public class User {
         this.firstname = f;
         this.lastname = l;
         this.password = p;
+        this.setId(UUID.randomUUID());
+        this.setTime(LocalTime.now());
     }
 }
