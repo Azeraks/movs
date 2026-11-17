@@ -5,6 +5,8 @@ import com.azera.movs.exercise_05.adapter.controller.in.dto.RegisterUserRequest;
 import com.azera.movs.exercise_05.adapter.controller.in.dto.RegisterUserResponse;
 import com.azera.movs.exercise_05.application.port.in.UserManagementPort;
 import com.azera.movs.exercise_05.domain.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,11 @@ import java.net.URI;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
-    UserManagementPort userManagementPort;
-
-    public UserController(UserManagementPort userManagementPort) {
-        this.userManagementPort = userManagementPort;
-    }
+    private final UserManagementPort userManagementPort;
 
 
     @PostMapping("/registration")

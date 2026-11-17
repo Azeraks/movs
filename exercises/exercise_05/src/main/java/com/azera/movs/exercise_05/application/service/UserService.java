@@ -1,20 +1,22 @@
 package com.azera.movs.exercise_05.application.service;
 
-import com.azera.movs.exercise_05.adapter.controller.out.UserStorageAdapter;
 import com.azera.movs.exercise_05.application.port.in.UserManagementPort;
 import com.azera.movs.exercise_05.application.port.out.UserStoragePort;
 import com.azera.movs.exercise_05.application.service.exceptions.UserNotFoundException;
 import com.azera.movs.exercise_05.domain.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tools.jackson.databind.ObjectMapper;
 
-import java.time.LocalTime;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserManagementPort {
 
-    UserStoragePort storagePort = new UserStorageAdapter(new ObjectMapper());
+
+    private final UserStoragePort storagePort;
+
 
     @Override
     public void register(User user) {
