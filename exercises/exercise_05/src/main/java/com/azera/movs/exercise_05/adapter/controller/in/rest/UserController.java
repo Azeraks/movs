@@ -1,6 +1,5 @@
 package com.azera.movs.exercise_05.adapter.controller.in.rest;
 
-import com.azera.movs.exercise_05.adapter.controller.in.dto.DeleteUserResponse;
 import com.azera.movs.exercise_05.adapter.controller.in.dto.GetUserResponse;
 import com.azera.movs.exercise_05.adapter.controller.in.dto.RegisterUserRequest;
 import com.azera.movs.exercise_05.adapter.controller.in.dto.RegisterUserResponse;
@@ -59,17 +58,10 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<DeleteUserResponse> deleteUser(@PathVariable UUID id) {
-
-        DeleteUserResponse response;
-
+    ResponseEntity<Object> deleteUser(@PathVariable UUID id) {
         if(!userManagementPort.deleteUser(id)) {
-            response = new DeleteUserResponse(
-                    "User was successfully deleted"
-            );
-            return ResponseEntity.status(HttpStatus.OK).body(response);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        response = new DeleteUserResponse("User could not be deleted");
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
