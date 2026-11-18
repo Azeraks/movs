@@ -57,6 +57,7 @@ public class UserController {
         }
     }
 
+
     @DeleteMapping("/{id}")
     ResponseEntity<Object> deleteUser(@PathVariable UUID id) {
         if(!userManagementPort.deleteUser(id)) {
